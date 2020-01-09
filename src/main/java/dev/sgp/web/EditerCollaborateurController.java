@@ -19,6 +19,7 @@ public class EditerCollaborateurController extends HttpServlet {
 		if (matriculeParam == null || "".equals(matriculeParam.trim())) {
 			// optionnel indique au client le format attendu
 			resp.setContentType("text/html");
+			
 			resp.setStatus(400);
 			resp.getWriter().write("Un matricule est attendu");
 		} else {
@@ -60,7 +61,7 @@ public class EditerCollaborateurController extends HttpServlet {
 					+ "</li>" +"<li>nom = " + nomParam
 					+ "</li>" +"<li>prenom = " + prenomParam
 					+ "</li>" + "</ul>");
-		}
+		} 
 		
 	}
 
