@@ -2,6 +2,8 @@ package dev.sgp.web;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +21,7 @@ public class CreerCollaborateurController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//req.setAttribute("nom", "");
 		// indique à la servelt de déléguer l'affichage à la jsp
 		req.getRequestDispatcher("/WEB-INF/views/collab/creerCollaborateurs.jsp").forward(req, resp);
 	}
@@ -27,13 +30,16 @@ public class CreerCollaborateurController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 				
-//		 String suffixe = data.getString("suffixe.email");
+		ResourceBundle data = ResourceBundle.getBundle("application");
+		
+
 		String dateDeNaissance = req.getParameter("dateNaiss");
 		String adresse = req.getParameter("adresse");
 		String nom = req.getParameter("nom");
 		String prenom = req.getParameter("prenom");
 		String numSecu = req.getParameter("numSecu");
-
+		String emailPro = prenom + "." + nom +"@"+data.getString("email");
+		ZonedDateTime date = ZonedDateTime.now();
 		
 		boolean flag = false;
 
@@ -56,10 +62,14 @@ public class CreerCollaborateurController extends HttpServlet {
 			req.setAttribute("erreurPrenom", true);
 			flag = true;
 		}
-		if (numSecu == null || "".equals(numSecu.trim())) {
+		if (!numSecu.matches("[0-9]+") || numSecu.length() != 15) {
 			req.setAttribute("erreurSecu", true);
 			flag = true;
 		}
+		if(emailPro== null || "".equals(emailPro.trim())){
+			req.setAttribute("email", true);
+		}
+		
 
 		if (flag == false) {
 			Collaborateur collaborateur = new Collaborateur();
@@ -68,6 +78,10 @@ public class CreerCollaborateurController extends HttpServlet {
 			collaborateur.setNumSecu(numSecu);
 			collaborateur.setAdresse(adresse);
 			collaborateur.setDateDeNaissance(LocalDate.parse(dateDeNaissance));
+			collaborateur.setEmailPro(emailPro);
+			collaborateur.setDateHeureCreation(date);
+			
+			
 
 			collabService.sauvegarderCollaborateur(collaborateur);
 		

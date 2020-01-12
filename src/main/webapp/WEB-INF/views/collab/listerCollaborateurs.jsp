@@ -11,7 +11,7 @@ dist/css/bootstrap.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#"> <img src="images/coll2.jpg"
+		<a class="navbar-brand" href="#"> <img src="<%=request.getContextPath()%>/images/coll2.jpg"
 			width="30" height="30" alt="">
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -37,6 +37,10 @@ dist/css/bootstrap.css">
 		for (Collaborateur coll : collaborateurs) {
 		%>
 		<li><%=coll.getNom()%></li>
+		<li><%=coll.getPrenom()%></li>
+		<li><%=coll.getEmailPro()%></li>
+		<li><%=coll.getNumSecu()%></li>
+		<li><%=coll.getDateHeureCreation()%></li>
 		<%
 		}
 		%>
