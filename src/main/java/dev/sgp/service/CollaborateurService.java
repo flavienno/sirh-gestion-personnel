@@ -18,8 +18,3 @@ public class CollaborateurService {
 	}
 }
 
-	// ToDo
-	//public void creerCollaborateur(Collaborateur collaborateur) {
-	
-	//}
-

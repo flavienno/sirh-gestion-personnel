@@ -23,7 +23,7 @@ dist/css/bootstrap.css">
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item active"><a class="nav-link"
-					href="index.html">Collaborateurs </a></li>
+					href="<%=application.getContextPath()%>/collaborateurs/lister">Collaborateurs </a></li>
 				<li class="nav-item"><a class="nav-link" href="stats.html">Statistiques</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="activites.html">Activités</a>
